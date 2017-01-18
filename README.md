@@ -1,2 +1,2 @@
-# pyplugger
-Pyplugger is a lightweight pything plugin framework
+# pypluggy
+Pypluggy is a lightweight python plugin framework
