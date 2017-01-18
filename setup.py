@@ -5,11 +5,11 @@ if not sys.version_info[0] == 3:
     sys.exit("Sorry, only python version 3 is supported")
 
 setuptools.setup(
-    name='pyplugger',
+    name='pypluggy',
     version='0.0.1',
-    description='pyplugger is a lightweight plugin framework for python',
-    long_description='pyplugger is a lightweight plugin framework for python',
-    url='https://veltzer.github.io/pyplugger',
+    description='pypluggy is a lightweight plugin framework for python',
+    long_description='pypluggy is a lightweight plugin framework for python',
+    url='https://veltzer.github.io/pypluggy',
     author='Mark Veltzer',
     author_email='mark.veltzer@gmail.com',
     license='GPL3',
