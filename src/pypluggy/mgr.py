@@ -17,9 +17,8 @@ class Mgr:
         self.strict = strict
         self.classes_instantiated = dict()
 
-    def load_modules(self, folder=None, prefix=None):
+    def load_modules(self, folder='.', prefix='.'):
         """
-
         :param folder:
         :param prefix:
         :return:
@@ -61,3 +60,12 @@ class Mgr:
                     inst_set.add(instance)
         self.classes_instantiated[cls] = inst_set
         return inst_set
+
+    def for_click(self, cls=None, check_type=type):
+        results = []
+        for module in self.modules_loaded:
+            for name, t in module.__dict__.items():
+                if type(t) is check_type and issubclass(t, cls):
+                    results.append(t)
+        return results
+
