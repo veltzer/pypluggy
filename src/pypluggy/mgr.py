@@ -17,7 +17,7 @@ class Mgr:
         self.strict = strict
         self.classes_instantiated = dict()
 
-    def load_modules(self, folder='.', prefix='.'):
+    def load_modules(self, folder='.', prefix=''):
         """
         :param folder:
         :param prefix:
@@ -38,10 +38,14 @@ class Mgr:
                 m = importlib.import_module(modname)
                 self.modules_loaded.add(m)
             except Exception as e:
+                logger.debug("got exception <%s>", e)
                 if self.strict:
                     raise e
             logger.debug("loaded <%s>", modname)
             self.module_names_loaded.add(modname)
+
+    def print(self):
+        print(self.module_names_loaded)
 
     def yield_modules(self):
         for module in self.modules_loaded:
@@ -61,11 +65,23 @@ class Mgr:
         self.classes_instantiated[cls] = inst_set
         return inst_set
 
-    def for_click(self, cls=None, check_type=type):
+    def list_names(self, cls=None):
+        assert cls is not None
         results = []
         for module in self.modules_loaded:
             for name, t in module.__dict__.items():
-                if type(t) is check_type and issubclass(t, cls):
-                    results.append(t)
+                if type(t) is type and issubclass(t, cls):
+                    results.append(t.__name__)
         return results
+
+    def instantiate_name(self, cls=None, name=None):
+        assert cls is not None
+        assert name is not None
+        for module in self.modules_loaded:
+            for name, t in module.__dict__.items():
+                if type(t) is type and issubclass(t, cls):
+                    if t.__name__ == name:
+                        return t()
+        raise ValueError("did not find your name {}".format(name))
+
 
