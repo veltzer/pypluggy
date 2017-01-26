@@ -94,13 +94,13 @@ class Mgr:
             self,
             attribute_name: str=None,
             attribute_value: str=None,
-            name: str=None,
+            class_name: str=None,
     ) -> str:
         for module in self.modules_loaded:
             for name, t in module.__dict__.items():
                 logger.debug("trying <%s> <%s> <%s>", name, t.__class__.__name__, type(t))
                 if hasattr(t, attribute_name) and getattr(t, attribute_name) == attribute_value:
-                    if t.__name__ == name:
+                    if name == class_name:
                         return t()
         raise ValueError("not found")
 
