@@ -70,6 +70,7 @@ class Mgr:
         results = []
         for module in self.modules_loaded:
             for name, t in module.__dict__.items():
+                logger.debug("trying <%s>", name)
                 if type(t) is type and issubclass(t, cls):
                     results.append(t.__name__)
         return results
@@ -79,6 +80,7 @@ class Mgr:
         assert name is not None
         for module in self.modules_loaded:
             for name, t in module.__dict__.items():
+                logger.debug("trying <%s>", name)
                 if type(t) is type and issubclass(t, cls):
                     if t.__name__ == name:
                         return t()
