@@ -77,6 +77,17 @@ class Mgr:
                     results.append(t.__name__)
         return results
 
+    def list_by_attr(self, attribute_name: str=None):
+        assert attribute_name is not None
+        results = []
+        for module in self.modules_loaded:
+            for name, t in module.__dict__.items():
+                logger.debug("trying <%s> <%s> <%s>", name, t.__class__.__name__, type(t))
+                if attribute_name in t.__dict__:
+                    logger.debug("appending <%s>", name)
+                    results.append(t.__name__)
+        return results
+
     def instantiate_name(self, cls=None, name=None):
         assert cls is not None
         assert name is not None
