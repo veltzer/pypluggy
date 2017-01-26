@@ -17,7 +17,7 @@ class TestNames(unittest.TestCase):
     def testList(self):
         m = Mgr()
         m.load_modules()
-        self.assertListEqual(m.list_names(cls=unittest.TestCase), ['TestNames'], msg='uh uh')
+        self.assertListEqual(m.list_names(cls=unittest.TestCase, check_type=type), ['TestNames'], msg='uh uh')
 
     def testInstantiate(self):
         m = Mgr()
