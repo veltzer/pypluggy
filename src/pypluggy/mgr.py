@@ -80,6 +80,7 @@ class Mgr:
 
     def list_by_attr(self, attribute_name: str=None, attribute_value: str=None) -> List[str]:
         assert attribute_name is not None
+        assert attribute_value is not None
         results = []
         for module in self.modules_loaded:
             for name, t in module.__dict__.items():
@@ -88,6 +89,20 @@ class Mgr:
                     logger.debug("appending <%s>", name)
                     results.append(t.__name__)
         return results
+
+    def instantiate_by_attr_name(
+            self,
+            attribute_name: str=None,
+            attribute_value: str=None,
+            name: str=None,
+    ) -> str:
+        for module in self.modules_loaded:
+            for name, t in module.__dict__.items():
+                logger.debug("trying <%s> <%s> <%s>", name, t.__class__.__name__, type(t))
+                if hasattr(t, attribute_name) and getattr(t, attribute_name) == attribute_value:
+                    if t.__name__ === name:
+                        return t()
+        raise ValueError("not found")
 
     def instantiate_name(self, cls=None, name=None):
         assert cls is not None
