@@ -6,7 +6,7 @@ import pkgutil  # for iter_modules
 import logging  # for getLogger
 import os.path  # for isdir
 import importlib  # for import_module
-from typing import List
+from typing import List, Any
 
 logger = logging.getLogger(__name__)
 
@@ -95,7 +95,7 @@ class Mgr:
             attribute_name: str=None,
             attribute_value: str=None,
             class_name: str=None,
-    ) -> str:
+    ) -> Any:
         for module in self.modules_loaded:
             for name, t in module.__dict__.items():
                 logger.debug("trying <%s> <%s> <%s>", name, t.__class__.__name__, type(t))
