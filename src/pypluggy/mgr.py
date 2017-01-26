@@ -6,6 +6,7 @@ import pkgutil  # for iter_modules
 import logging  # for getLogger
 import os.path  # for isdir
 import importlib  # for import_module
+from typing import List
 
 logger = logging.getLogger(__name__)
 
@@ -77,13 +78,13 @@ class Mgr:
                     results.append(t.__name__)
         return results
 
-    def list_by_attr(self, attribute_name: str=None):
+    def list_by_attr(self, attribute_name: str=None, attribute_value: str=None) -> List[str]:
         assert attribute_name is not None
         results = []
         for module in self.modules_loaded:
             for name, t in module.__dict__.items():
                 logger.debug("trying <%s> <%s> <%s>", name, t.__class__.__name__, type(t))
-                if attribute_name in t.__dict__:
+                if hasattr(t, attribute_name) and getattr(t, attribute_name) == attribute_value:
                     logger.debug("appending <%s>", name)
                     results.append(t.__name__)
         return results
