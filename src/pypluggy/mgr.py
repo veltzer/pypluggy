@@ -72,6 +72,7 @@ class Mgr:
             for name, t in module.__dict__.items():
                 logger.debug("trying <%s>", name)
                 if type(t) is type and issubclass(t, cls):
+                    logger.debug("appending <%s>", name)
                     results.append(t.__name__)
         return results
 
@@ -82,6 +83,7 @@ class Mgr:
             for name, t in module.__dict__.items():
                 logger.debug("trying <%s>", name)
                 if type(t) is type and issubclass(t, cls):
+                    logger.debug("considering <%s>", name)
                     if t.__name__ == name:
                         return t()
         raise ValueError("did not find your name {}".format(name))
