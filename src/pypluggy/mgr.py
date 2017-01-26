@@ -71,7 +71,7 @@ class Mgr:
         results = []
         for module in self.modules_loaded:
             for name, t in module.__dict__.items():
-                logger.debug("trying <%s> <%s> <%s>", name, t.__class__.__name__, cls)
+                logger.debug("trying <%s> <%s> <%s> <%s>", name, t.__class__.__name__, cls, type(t))
                 if type(t) is check_type and issubclass(t, cls):
                     logger.debug("appending <%s>", name)
                     results.append(t.__name__)
