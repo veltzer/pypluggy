@@ -100,7 +100,7 @@ class Mgr:
             for name, t in module.__dict__.items():
                 logger.debug("trying <%s> <%s> <%s>", name, t.__class__.__name__, type(t))
                 if hasattr(t, attribute_name) and getattr(t, attribute_name) == attribute_value:
-                    if t.__name__ === name:
+                    if t.__name__ == name:
                         return t()
         raise ValueError("not found")
 
