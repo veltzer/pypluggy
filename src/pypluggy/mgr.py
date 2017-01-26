@@ -81,7 +81,7 @@ class Mgr:
         assert name is not None
         for module in self.modules_loaded:
             for name, t in module.__dict__.items():
-                logger.debug("trying <%s>", name)
+                logger.debug("trying <%s> <%s>", name, cls)
                 if type(t) is type and issubclass(t, cls):
                     logger.debug("considering <%s>", name)
                     if t.__name__ == name:
