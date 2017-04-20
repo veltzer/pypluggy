@@ -6,7 +6,7 @@ if not sys.version_info[0] == 3:
 
 setuptools.setup(
     name='pypluggy',
-    version='0.0.7',
+    version='0.0.8',
     description='pypluggy is a lightweight plugin framework for python',
     long_description='pypluggy is a lightweight plugin framework for python',
     url='https://veltzer.github.io/pypluggy',
