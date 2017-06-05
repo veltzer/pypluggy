@@ -8,8 +8,6 @@ import os.path  # for isdir
 import importlib  # for import_module
 from typing import List, Any
 
-logger = logging.getLogger(__name__)
-
 
 class Mgr:
     def __init__(self, strict=True):
@@ -28,6 +26,7 @@ class Mgr:
         folder='pipeline/plugins'
         prefix='pipeline.plugins.'
         """
+        logger = logging.getLogger(__name__)
         logger.debug("starting")
         assert os.path.isdir(folder)
         assert prefix is not None
@@ -56,6 +55,7 @@ class Mgr:
         assert cls not in self.classes_instantiated
         assert cls is not None
         inst_set = set()
+        logger = logging.getLogger(__name__)
         for module in self.modules_loaded:
             for name, t in module.__dict__.items():
                 logger.debug("trying <%s>", name)
@@ -82,6 +82,7 @@ class Mgr:
         assert attribute_name is not None
         assert attribute_value is not None
         results = []
+        logger = logging.getLogger(__name__)
         for module in self.modules_loaded:
             for name, t in module.__dict__.items():
                 logger.debug("trying <%s> <%s> <%s>", name, t.__class__.__name__, type(t))
@@ -107,6 +108,7 @@ class Mgr:
     def instantiate_name(self, cls=None, name=None):
         assert cls is not None
         assert name is not None
+        logger = logging.getLogger(__name__)
         for module in self.modules_loaded:
             for name, t in module.__dict__.items():
                 logger.debug("trying <%s> <%s>", name, cls)
