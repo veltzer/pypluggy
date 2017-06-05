@@ -8,9 +8,6 @@ import pylogconf
 from pypluggy.mgr import Mgr
 
 pylogconf.setup()
-pypluggy.mgr.logger.setLevel(logging.DEBUG)
-# pypluggy.mgr.logger.disabled = False
-# pylogconf.show_tree()
 
 
 class TestNames(unittest.TestCase):
