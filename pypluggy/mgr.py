@@ -97,6 +97,7 @@ class Mgr:
             attribute_value: str=None,
             class_name: str=None,
     ) -> Any:
+        logger = logging.getLogger(__name__)
         for module in self.modules_loaded:
             for name, t in module.__dict__.items():
                 logger.debug("trying <%s> <%s> <%s>", name, t.__class__.__name__, type(t))
