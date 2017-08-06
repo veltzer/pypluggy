@@ -1,8 +1,5 @@
 import unittest
 
-import logging
-
-import pypluggy
 import pylogconf
 
 from pypluggy.mgr import Mgr

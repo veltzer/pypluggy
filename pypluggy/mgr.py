@@ -48,16 +48,16 @@ class Mgr:
         print(self.module_names_loaded)
 
     def yield_modules(self):
-        for module in self.modules_loaded:
-            yield module
+        for current_module in self.modules_loaded:
+            yield current_module
 
     def find_and_instantiate(self, cls=None, check_type=type):
         assert cls not in self.classes_instantiated
         assert cls is not None
         inst_set = set()
         logger = logging.getLogger(__name__)
-        for module in self.modules_loaded:
-            for name, t in module.__dict__.items():
+        for current_module in self.modules_loaded:
+            for name, t in current_module.__dict__.items():
                 logger.debug("trying <%s>", name)
                 if type(t) is check_type and issubclass(t, cls):
                     logger.debug("instantiating <%s>", t)
@@ -70,8 +70,9 @@ class Mgr:
         assert cls is not None
         assert check_type is not None
         results = []
-        for module in self.modules_loaded:
-            for name, t in module.__dict__.items():
+        logger = logging.getLogger(__name__)
+        for current_module in self.modules_loaded:
+            for name, t in current_module.__dict__.items():
                 logger.debug("trying <%s> <%s> <%s> <%s>", name, t.__class__.__name__, cls, type(t))
                 if type(t) is check_type and issubclass(t, cls):
                     logger.debug("appending <%s>", name)
@@ -83,8 +84,8 @@ class Mgr:
         assert attribute_value is not None
         results = []
         logger = logging.getLogger(__name__)
-        for module in self.modules_loaded:
-            for name, t in module.__dict__.items():
+        for current_module in self.modules_loaded:
+            for name, t in current_module.__dict__.items():
                 logger.debug("trying <%s> <%s> <%s>", name, t.__class__.__name__, type(t))
                 if hasattr(t, attribute_name) and getattr(t, attribute_name) == attribute_value:
                     logger.debug("appending <%s>", name)
@@ -98,8 +99,8 @@ class Mgr:
             class_name: str=None,
     ) -> Any:
         logger = logging.getLogger(__name__)
-        for module in self.modules_loaded:
-            for name, t in module.__dict__.items():
+        for current_module in self.modules_loaded:
+            for name, t in current_module.__dict__.items():
                 logger.debug("trying <%s> <%s> <%s>", name, t.__class__.__name__, type(t))
                 if hasattr(t, attribute_name) and getattr(t, attribute_name) == attribute_value:
                     if name == class_name:
@@ -110,8 +111,8 @@ class Mgr:
         assert cls is not None
         assert name is not None
         logger = logging.getLogger(__name__)
-        for module in self.modules_loaded:
-            for name, t in module.__dict__.items():
+        for current_module in self.modules_loaded:
+            for name, t in current_module.__dict__.items():
                 logger.debug("trying <%s> <%s>", name, cls)
                 if type(t) is type and issubclass(t, cls):
                     logger.debug("considering <%s>", name)
