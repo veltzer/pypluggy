@@ -1,1 +1,2 @@
-This is to make 'python setup.py sdist' happy...
+# pypluggy
+Pypluggy is a lightweight python plugin framework
