@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name='pypluggy',
-    version='0.0.10',
+    version='0.0.11',
     description='pypluggy is a lightweight plugin framework for python',
     long_description='pypluggy is a lightweight plugin framework for python',
     url='https://github.com/veltzer/pypluggy',
