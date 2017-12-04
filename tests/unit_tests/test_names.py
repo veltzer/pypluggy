@@ -1,10 +1,10 @@
 import unittest
 
-import pylogconf
+import pylogconf.core
 
 from pypluggy.mgr import Mgr
 
-pylogconf.setup()
+pylogconf.core.setup()
 
 
 class TestNames(unittest.TestCase):
