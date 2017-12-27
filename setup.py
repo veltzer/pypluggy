@@ -5,7 +5,7 @@ setuptools.setup(
     version='0.0.11',
     description='pypluggy is a lightweight plugin framework for python',
     long_description='pypluggy is a lightweight plugin framework for python',
-    url='https://github.com/veltzer/pypluggy',
+    url='https://veltzer.github.io/pypluggy',
     download_url='https://github.com/veltzer/pypluggy',
     author='Mark Veltzer',
     author_email='mark.veltzer@gmail.com',
