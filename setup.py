@@ -53,7 +53,6 @@ setuptools.setup(
     data_files=[
     ],
     entry_points={"console_scripts": [
-        'pymakehelper=pymakehelper.endpoints.main:main',
     ]},
     python_requires=">=3.6",
 )
