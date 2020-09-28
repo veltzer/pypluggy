@@ -16,6 +16,8 @@
 ![Downloads](https://pepy.tech/badge/pypluggy/month)
 ![Downloads](https://pepy.tech/badge/pypluggy/week)
 
+[![Known Vulnerabilities](https://snyk.io/test/github/veltzer/pypluggy/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/veltzer/pypluggy?targetFile=requirements.txt)
+
 
 
 pypluggy is a lightweight plugin framework for python
