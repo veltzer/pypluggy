@@ -14,7 +14,6 @@
 ![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)
 
 ![build](https://github.com/veltzer/pypluggy/workflows/build/badge.svg)
-
 pypluggy is a lightweight plugin framework for python
 
 project website: https://veltzer.github.io/pypluggy
