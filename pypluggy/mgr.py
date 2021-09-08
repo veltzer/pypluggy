@@ -14,7 +14,7 @@ class Mgr:
         self.module_names_loaded = set()
         self.modules_loaded = set()
         self.strict = strict
-        self.classes_instantiated = dict()
+        self.classes_instantiated = {}
 
     def load_modules(self, folder='.', prefix=''):
         """
@@ -30,15 +30,16 @@ class Mgr:
         logger.debug("starting")
         assert os.path.isdir(folder)
         assert prefix is not None
-        for importer, modname, is_pkg in pkgutil.walk_packages(path=[folder], prefix=prefix):
+        for _importer, modname, _ in pkgutil.walk_packages(path=[folder], prefix=prefix):
             if modname in self.module_names_loaded:
                 continue
-            logger.debug("trying <%s>", modname)
+            logger.debug(f"trying {modname}")
             try:
                 m = importlib.import_module(modname)
                 self.modules_loaded.add(m)
+            # pylint: disable=broad-except
             except Exception as e:
-                logger.debug("got exception <%s>", e)
+                logger.debug(f"got exception {e}")
                 if self.strict:
                     raise e
             logger.debug("loaded <%s>", modname)
@@ -59,7 +60,7 @@ class Mgr:
         for current_module in self.modules_loaded:
             for name, t in current_module.__dict__.items():
                 logger.debug("trying <%s>", name)
-                if type(t) is check_type and issubclass(t, cls):
+                if isinstance(t, check_type):
                     logger.debug("instantiating <%s>", t)
                     instance = t()
                     inst_set.add(instance)
@@ -73,35 +74,36 @@ class Mgr:
         logger = logging.getLogger(__name__)
         for current_module in self.modules_loaded:
             for name, t in current_module.__dict__.items():
-                logger.debug("trying <%s> <%s> <%s> <%s>", name, t.__class__.__name__, cls, type(t))
-                if type(t) is check_type and issubclass(t, cls):
-                    logger.debug("appending <%s>", name)
+                logger.debug(f"trying {name} {t.__class__.__name__} {type(t)}")
+                # if type(t) is check_type and issubclass(t, cls):
+                if isinstance(t, check_type):
+                    logger.debug(f"appending {name}")
                     results.append(t.__name__)
         return results
 
-    def list_by_attr(self, attribute_name: str=None, attribute_value: str=None) -> List[str]:
+    def list_by_attr(self, attribute_name: str = None, attribute_value: str = None) -> List[str]:
         assert attribute_name is not None
         assert attribute_value is not None
         results = []
         logger = logging.getLogger(__name__)
         for current_module in self.modules_loaded:
             for name, t in current_module.__dict__.items():
-                logger.debug("trying <%s> <%s> <%s>", name, t.__class__.__name__, type(t))
+                logger.debug(f"trying {name} {t.__class__.__name__} {type(t)}")
                 if hasattr(t, attribute_name) and getattr(t, attribute_name) == attribute_value:
-                    logger.debug("appending <%s>", name)
+                    logger.debug(f"appending {name}")
                     results.append(t.__name__)
         return results
 
     def instantiate_by_attr_name(
             self,
-            attribute_name: str=None,
-            attribute_value: str=None,
-            class_name: str=None,
+            attribute_name: str = None,
+            attribute_value: str = None,
+            class_name: str = None,
     ) -> Any:
         logger = logging.getLogger(__name__)
         for current_module in self.modules_loaded:
             for name, t in current_module.__dict__.items():
-                logger.debug("trying <%s> <%s> <%s>", name, t.__class__.__name__, type(t))
+                logger.debug(f"trying {name} {t.__class__.__name__} {type(t)}")
                 if hasattr(t, attribute_name) and getattr(t, attribute_name) == attribute_value:
                     if name == class_name:
                         return t()
@@ -112,12 +114,11 @@ class Mgr:
         assert name is not None
         logger = logging.getLogger(__name__)
         for current_module in self.modules_loaded:
-            for name, t in current_module.__dict__.items():
-                logger.debug("trying <%s> <%s>", name, cls)
-                if type(t) is type and issubclass(t, cls):
-                    logger.debug("considering <%s>", name)
+            for cur_name, t in current_module.__dict__.items():
+                logger.debug(f"trying {cur_name} {cls}")
+                # if type(t) is type and issubclass(t, cls):
+                if isinstance(t, cls):
+                    logger.debug(f"considering {cur_name}")
                     if t.__name__ == name:
                         return t()
-        raise ValueError("did not find your name {}".format(name))
-
-
+        raise ValueError(f"did not find your name {name}")
