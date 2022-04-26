@@ -22,7 +22,7 @@ project_keywords = [
     "python",
 ]
 project_license = "MIT"
-project_year_started = "2017"
+project_year_started = 2017
 project_description = project_short_description
 project_platforms = [
     "python3",
