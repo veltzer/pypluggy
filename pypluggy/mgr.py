@@ -96,7 +96,7 @@ class Mgr:
 
     def instantiate_by_attr_name(
             self,
-            attribute_name: str = None,
+            attribute_name: str,
             attribute_value: str = None,
             class_name: str = None,
     ) -> Any:
