@@ -1,6 +1,6 @@
 from typing import List
 
-short_description: str = "pypluggy is a lightweight plugin framework for python"
+description_short: str = "pypluggy is a lightweight plugin framework for python"
 keywords: List[str] = [
     "plugin",
     "python",
