@@ -3,10 +3,11 @@ dev_requires = [
 ]
 config_requires = [
     "pyclassifiers",
-    "pydmt",
 ]
 make_requires = [
+    "pyclassifiers",
     "pymakehelper",
+    "pydmt",
 ]
 install_requires = [
     "pytconf",
