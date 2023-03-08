@@ -6,7 +6,7 @@ import pkgutil  # for iter_modules
 import logging  # for getLogger
 import os.path  # for isdir
 import importlib  # for import_module
-from typing import List, Any
+from typing import List, Any, Optional
 
 
 class Mgr:
@@ -81,7 +81,7 @@ class Mgr:
                     results.append(t.__name__)
         return results
 
-    def list_by_attr(self, attribute_name: str = None, attribute_value: str = None) -> List[str]:
+    def list_by_attr(self, attribute_name: Optional[str] = None, attribute_value: Optional[str] = None) -> List[str]:
         assert attribute_name is not None
         assert attribute_value is not None
         results = []
@@ -97,8 +97,8 @@ class Mgr:
     def instantiate_by_attr_name(
             self,
             attribute_name: str,
-            attribute_value: str = None,
-            class_name: str = None,
+            attribute_value: Optional[str] = None,
+            class_name: Optional[str] = None,
     ) -> Any:
         logger = logging.getLogger(__name__)
         for current_module in self.modules_loaded:
