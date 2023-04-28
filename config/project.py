@@ -1,7 +1,6 @@
-from typing import List
-
-description_short: str = "pypluggy is a lightweight plugin framework for python"
-keywords: List[str] = [
+name = "pypluggy"
+description_short = "pypluggy is a lightweight plugin framework for python"
+keywords = [
     "plugin",
     "python",
 ]
