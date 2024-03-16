@@ -49,8 +49,7 @@ class Mgr:
         print(self.module_names_loaded)
 
     def yield_modules(self):
-        for current_module in self.modules_loaded:
-            yield current_module
+        yield from self.modules_loaded
 
     def find_and_instantiate(self, cls=None, check_type=type):
         assert cls not in self.classes_instantiated

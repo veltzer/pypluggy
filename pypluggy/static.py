@@ -1,5 +1,5 @@
 """ version which can be consumed from within the module """
-VERSION_STR = "0.0.13"
+VERSION_STR = "0.0.14"
 DESCRIPTION = "pypluggy is a lightweight plugin framework for python"
 APP_NAME = "pypluggy"
 LOGGER_NAME = "pypluggy"
