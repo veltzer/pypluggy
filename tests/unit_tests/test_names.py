@@ -1,3 +1,7 @@
+"""
+test_names.py
+"""
+
 import unittest
 
 import pylogconf.core
