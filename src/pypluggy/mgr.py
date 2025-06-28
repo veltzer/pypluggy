@@ -6,7 +6,7 @@ import pkgutil  # for iter_modules
 import logging  # for getLogger
 import os.path  # for isdir
 import importlib  # for import_module
-from typing import List, Any, Optional
+from typing import Any
 
 
 class Mgr:
