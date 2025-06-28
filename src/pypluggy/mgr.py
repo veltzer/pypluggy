@@ -80,7 +80,7 @@ class Mgr:
                     results.append(t.__name__)
         return results
 
-    def list_by_attr(self, attribute_name: Optional[str] = None, attribute_value: Optional[str] = None) -> List[str]:
+    def list_by_attr(self, attribute_name: str | None = None, attribute_value: str | None = None) -> list[str]:
         assert attribute_name is not None
         assert attribute_value is not None
         results = []
@@ -96,8 +96,8 @@ class Mgr:
     def instantiate_by_attr_name(
             self,
             attribute_name: str,
-            attribute_value: Optional[str] = None,
-            class_name: Optional[str] = None,
+            attribute_value: str | None = None,
+            class_name: str | None = None,
     ) -> Any:
         logger = logging.getLogger(__name__)
         for current_module in self.modules_loaded:
