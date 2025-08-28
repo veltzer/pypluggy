@@ -16,15 +16,15 @@ class Mgr:
         self.strict = strict
         self.classes_instantiated = {}
 
-    def load_modules(self, folder='.', prefix=''):
+    def load_modules(self, folder=".", prefix=""):
         """
         :param folder:
         :param prefix:
         :return:
 
         example of input:
-        folder='pipeline/plugins'
-        prefix='pipeline.plugins.'
+        folder="pipeline/plugins"
+        prefix="pipeline.plugins."
         """
         logger = logging.getLogger(__name__)
         logger.debug("starting")
