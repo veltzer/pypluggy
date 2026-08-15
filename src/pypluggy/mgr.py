@@ -2,10 +2,10 @@
 This is a light weight plugin based system
 """
 
-import pkgutil  # for iter_modules
+import importlib  # for import_module
 import logging  # for getLogger
 import os.path  # for isdir
-import importlib  # for import_module
+import pkgutil  # for iter_modules
 from typing import Any
 
 
@@ -41,7 +41,7 @@ class Mgr:
             except Exception as e:
                 logger.debug(f"got exception {e}")
                 if self.strict:
-                    raise e
+                    raise
             logger.debug("loaded <%s>", modname)
             self.module_names_loaded.add(modname)
 
@@ -103,9 +103,8 @@ class Mgr:
         for current_module in self.modules_loaded:
             for name, t in current_module.__dict__.items():
                 logger.debug(f"trying {name} {t.__class__.__name__} {type(t)}")
-                if hasattr(t, attribute_name) and getattr(t, attribute_name) == attribute_value:
-                    if name == class_name:
-                        return t()
+                if hasattr(t, attribute_name) and getattr(t, attribute_name) == attribute_value and name == class_name:
+                    return t()
         raise ValueError("not found")
 
     def instantiate_name(self, cls=None, name=None):
