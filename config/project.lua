@@ -4,3 +4,4 @@ KEYWORDS = {
     "plugin",
     "python",
 }
+PYPI = true
