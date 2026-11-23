@@ -33,13 +33,12 @@ class Mgr:
         for _importer, modname, _ in pkgutil.walk_packages(path=[folder], prefix=prefix):
             if modname in self.module_names_loaded:
                 continue
-            logger.debug(f"trying {modname}")
+            logger.debug("trying %s", modname)
             try:
                 m = importlib.import_module(modname)
                 self.modules_loaded.add(m)
-            # pylint: disable=broad-except
             except Exception as e:
-                logger.debug(f"got exception {e}")
+                logger.debug("got exception %s", e)
                 if self.strict:
                     raise
             logger.debug("loaded <%s>", modname)
@@ -73,10 +72,10 @@ class Mgr:
         logger = logging.getLogger(__name__)
         for current_module in self.modules_loaded:
             for name, t in current_module.__dict__.items():
-                logger.debug(f"trying {name} {t.__class__.__name__} {type(t)}")
+                logger.debug("trying %s %s %s", name, t.__class__.__name__, type(t))
                 # if type(t) is check_type and issubclass(t, cls):
                 if isinstance(t, check_type):
-                    logger.debug(f"appending {name}")
+                    logger.debug("appending %s", name)
                     results.append(t.__name__)
         return results
 
@@ -87,9 +86,9 @@ class Mgr:
         logger = logging.getLogger(__name__)
         for current_module in self.modules_loaded:
             for name, t in current_module.__dict__.items():
-                logger.debug(f"trying {name} {t.__class__.__name__} {type(t)}")
+                logger.debug("trying %s %s %s", name, t.__class__.__name__, type(t))
                 if hasattr(t, attribute_name) and getattr(t, attribute_name) == attribute_value:
-                    logger.debug(f"appending {name}")
+                    logger.debug("appending %s", name)
                     results.append(t.__name__)
         return results
 
@@ -102,7 +101,7 @@ class Mgr:
         logger = logging.getLogger(__name__)
         for current_module in self.modules_loaded:
             for name, t in current_module.__dict__.items():
-                logger.debug(f"trying {name} {t.__class__.__name__} {type(t)}")
+                logger.debug("trying %s %s %s", name, t.__class__.__name__, type(t))
                 if hasattr(t, attribute_name) and getattr(t, attribute_name) == attribute_value and name == class_name:
                     return t()
         raise ValueError("not found")
@@ -113,10 +112,10 @@ class Mgr:
         logger = logging.getLogger(__name__)
         for current_module in self.modules_loaded:
             for cur_name, t in current_module.__dict__.items():
-                logger.debug(f"trying {cur_name} {cls}")
+                logger.debug("trying %s %s", cur_name, cls)
                 # if type(t) is type and issubclass(t, cls):
                 if isinstance(t, cls):
-                    logger.debug(f"considering {cur_name}")
+                    logger.debug("considering %s", cur_name)
                     if t.__name__ == name:
                         return t()
         raise ValueError(f"did not find your name {name}")
