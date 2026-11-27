@@ -10,13 +10,13 @@ from typing import Any
 
 
 class Mgr:
-    def __init__(self, *, strict=True):
+    def __init__(self, *, strict: bool = True) -> None:
         self.module_names_loaded = set()
         self.modules_loaded = set()
         self.strict = strict
         self.classes_instantiated = {}
 
-    def load_modules(self, folder=".", prefix=""):
+    def load_modules(self, folder: str = ".", prefix: str = "") -> None:
         """
         :param folder:
         :param prefix:
@@ -44,13 +44,13 @@ class Mgr:
             logger.debug("loaded <%s>", modname)
             self.module_names_loaded.add(modname)
 
-    def print(self):
+    def print(self) -> None:
         print(self.module_names_loaded)
 
     def yield_modules(self):
         yield from self.modules_loaded
 
-    def find_and_instantiate(self, cls=None, check_type=type):
+    def find_and_instantiate(self, cls: type | None = None, check_type: type[type] = type):
         assert cls not in self.classes_instantiated
         assert cls is not None
         inst_set = set()
@@ -65,7 +65,7 @@ class Mgr:
         self.classes_instantiated[cls] = inst_set
         return inst_set
 
-    def list_names(self, cls=None, check_type=None):
+    def list_names(self, cls: type | None = None, check_type: type | None = None):
         assert cls is not None
         assert check_type is not None
         results = []
@@ -106,7 +106,7 @@ class Mgr:
                     return t()
         raise ValueError("not found")
 
-    def instantiate_name(self, cls=None, name=None):
+    def instantiate_name(self, cls: type | None = None, name: str | None = None):
         assert cls is not None
         assert name is not None
         logger = logging.getLogger(__name__)
