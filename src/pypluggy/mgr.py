@@ -10,7 +10,7 @@ from typing import Any
 
 
 class Mgr:
-    def __init__(self, strict=True):
+    def __init__(self, *, strict=True):
         self.module_names_loaded = set()
         self.modules_loaded = set()
         self.strict = strict
