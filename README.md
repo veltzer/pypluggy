@@ -9,7 +9,7 @@ project website: <https://veltzer.github.io/pypluggy>
 
 author: Mark Veltzer
 
-version: 0.0.15
+version: 0.0.16
 
 ## github
 
